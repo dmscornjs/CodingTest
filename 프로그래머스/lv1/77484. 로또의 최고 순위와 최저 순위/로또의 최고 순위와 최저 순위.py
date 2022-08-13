@@ -1,6 +1,4 @@
 def solution(lottos, win_nums):
-    lottos.sort()
-    win_nums.sort()
     zero = lottos.count(0)
     c = 0
     l = lottos.copy()
