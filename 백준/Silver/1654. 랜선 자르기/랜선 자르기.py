@@ -1,21 +1,22 @@
+import sys
+input = sys.stdin.readline
 k, n = map(int, input().split())
 li = []
-for i in range(k):
+for _ in range(k):
     li.append(int(input()))
-start = 0
-end = max(li)
-while (start <= end):
-    t = (start + end+1)//2
-    c = 0
+li.sort()
+
+def bs(start, end):
+    if start >= end:
+        return end
+    cut = (start + end+1) // 2
+    cnt = 0
     for i in li:
-        c += i//t
+        cnt += i // cut
+    if cnt >= n:
+        return bs(cut, end)
 
-    if c<n:
-        end = t-1
-
-    else:
-        ans = t
-        start = t+1
-
-print(ans)
-    
+    elif cnt < n:
+        return bs(start, cut-1)
+            
+print(bs(1, max(li)))
