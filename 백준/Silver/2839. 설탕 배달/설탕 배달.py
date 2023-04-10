@@ -1,13 +1,24 @@
+import sys
+input = sys.stdin.readline
 n = int(input())
-c = 0
-x = n
+
+s = n
+ans = 0
+
 while True:
-    if x <0:
-        print(-1)
+    if s < 3:
+        ans = -1
         break
-    elif x % 5 == 0:
-        c+=(x//5)
-        print(c)
+
+    elif s % 5 == 0:
+        ans += s // 5
         break
-    x -=3
-    c+=1
+
+    else:
+        s -= 3
+        ans +=1
+        if s == 0:
+            break
+
+print(ans)
+    
