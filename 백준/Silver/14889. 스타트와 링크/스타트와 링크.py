@@ -1,27 +1,25 @@
 from itertools import combinations
+import sys
+
+input = sys.stdin.readline
 
 n = int(input())
-set = [c for c in range(n)]
-
-li = []
+nl = [c for c in range(n)]
+s = []
 for _ in range(n):
-    li.append(list(map(int, input().split())))
-sums = []
+    s.append(list(map(int, input().split())))
 
-start = combinations(set, n//2)
-for j in start:
-    #print(j)
-    data = combinations(j, 2)
-    total = 0
-    for i in data:
-        a, b = i[0], i[1]
-        total += li[a][b] + li[b][a]
-    sums.append(total)
+ans = []
+answer = []
 
-answer = abs(sums[-1] - sums[0])
+for i in combinations(nl,n//2):
+    #print(i)
+    im = 0
+    for j in combinations(i, 2):
+        im += s[j[0]][j[1]] + s[j[1]][j[0]]
+    ans.append(im)
 
-for k in range(len(sums)//2):
-    if abs(sums[k] - sums[-k-1]) <answer:
-        answer = abs(sums[k] - sums[-k-1])
+for u in range(len(ans)//2):
+    answer.append(abs(ans[u] - ans[-(u+1)]))
 
-print(answer)
+print(min(answer))
